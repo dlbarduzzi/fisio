@@ -8,16 +8,16 @@ import { Pressable } from "react-native"
 import { TextClassContext } from "@/components/ui/text"
 
 const buttonVariants = cva(
-  `group/button shrink-0 inline-flex items-center justify-center rounded-lg
-  overflow-hidden border border-transparent`,
+  `group/button shrink-0 inline-flex flex-row items-center justify-center rounded-xl
+  overflow-hidden border border-transparent border-b-4`,
   {
     variants: {
       variant: {
-        default: "bg-neutral-900",
-        outline: "border-neutral-300 bg-white",
+        default: "bg-sky-500 border-b-sky-600",
+        outline: "border-neutral-300 border-b-neutral-200 bg-white",
       },
       size: {
-        default: "h-10 px-4 py-2",
+        default: "h-14 px-4 py-2",
       },
     },
     defaultVariants: {
@@ -28,12 +28,12 @@ const buttonVariants = cva(
 )
 
 const buttonTextVariants = cva(
-  "text-sm font-medium",
+  "text-base font-medium",
   {
     variants: {
       variant: {
-        default: "text-white",
-        outline: "text-neutral-900",
+        default: "text-white font-semibold uppercase",
+        outline: "text-neutral-600",
       },
       size: {
         default: "",

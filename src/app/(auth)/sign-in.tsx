@@ -1,10 +1,20 @@
+import type { ReactNode } from "react"
+
+import { Link } from "expo-router"
 import { useState } from "react"
+
+import { useSafeAreaInsets } from "react-native-safe-area-context"
 import { Alert, ScrollView, View } from "react-native"
 import { isClerkAPIResponseError, useSSO } from "@clerk/expo"
 
 import { Text } from "@/components/ui/text"
 import { Button } from "@/components/ui/button"
-import { Link } from "expo-router"
+
+import {
+  AppleLogo,
+  FacebookLogo,
+  GoogleLogo,
+} from "@/components/icons/brand-logos"
 
 function errorMessage(error: unknown) {
   if (isClerkAPIResponseError(error)) {
@@ -42,65 +52,84 @@ function useGoogleSignIn() {
   return { pending, signIn }
 }
 
+function notImplemented() {
+  Alert.alert("Not implemented yet")
+}
+
+type ProviderButtonProps = {
+  label: string
+  logo: ReactNode
+  onPress: () => void
+  pending?: boolean
+}
+
+function ProviderButton({ label, logo, onPress, pending }: ProviderButtonProps) {
+  return (
+    <Button
+      variant="outline"
+      className="gap-x-2"
+      onPress={onPress}
+      aria-busy={pending}
+      aria-label={label}
+    >
+      <View>
+        {logo}
+      </View>
+      <Text>{label}</Text>
+    </Button>
+  )
+}
+
 export default function SignIn() {
   const google = useGoogleSignIn()
+  const insets = useSafeAreaInsets()
   return (
     <ScrollView
-      className="flex-1"
+      className="flex-1 bg-white"
+      contentContainerStyle={{
+        paddingTop: insets.top,
+        paddingBottom: insets.bottom,
+      }}
       contentContainerClassName="grow"
       contentInsetAdjustmentBehavior="never"
     >
-      <View className="flex-1 items-center justify-center bg-white">
-        <Text variant="h1">
+      <View className="flex-1 justify-between px-6 py-8">
+        <Text variant="h1" className="text-center">
           Sign in
         </Text>
-        <View className="mt-6">
-          <Button
-            variant="outline"
-            onPress={google.signIn}
-            aria-busy={google.pending}
-          >
-            <Text>Sign in with Google</Text>
-          </Button>
+        <View className="flex-1" />
+        <View className="gap-3">
+          <ProviderButton
+            label="Sign in with Google"
+            logo={<GoogleLogo />}
+            onPress={() => void google.signIn()}
+            pending={google.pending}
+          />
+          <ProviderButton
+            label="Sign in with Facebook"
+            logo={<FacebookLogo />}
+            onPress={notImplemented}
+          />
+          <ProviderButton
+            label="Sign in with Apple"
+            logo={<AppleLogo />}
+            onPress={notImplemented}
+          />
+          <Text className="mt-3 text-center text-sm leading-[20px] text-neutral-500">
+            By continuing, you agree to our
+            {"\n"}
+            <Link href="/terms" className="font-medium">
+              Terms of Service
+            </Link>
+            {" "}
+            and
+            {" "}
+            <Link href="/privacy" className="font-medium">
+              Privacy Policy
+            </Link>
+            .
+          </Text>
         </View>
-        <View className="mt-3">
-          <Button variant="outline">
-            <Text>
-              Sign in with Facebook
-            </Text>
-          </Button>
-        </View>
-        <View className="mt-3">
-          <Button variant="outline">
-            <Text>
-              Sign in with Apple
-            </Text>
-          </Button>
-        </View>
-      </View>
-      <View className="mt-[10px] grow">
-        <Text
-          className="absolute inset-x-0 px-10 text-center leading-[20px]"
-        >
-          By continuing, you agree to our
-          {"\n"}
-          <Link
-            href="/terms"
-            className="font-medium"
-          >
-            Terms of Service
-          </Link>
-          {" "}
-          and
-          {" "}
-          <Link
-            href="/privacy"
-            className="font-medium"
-          >
-            Privacy Policy
-          </Link>
-          .
-        </Text>
       </View>
     </ScrollView>
   )
