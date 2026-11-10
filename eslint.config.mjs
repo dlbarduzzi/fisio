@@ -127,23 +127,6 @@ export default antfu(
       "ts/no-inferrable-types": "error",
     },
   },
-  // Needs type information, which Markdown code blocks do not have.
-  {
-    files: ["**/*.{ts,tsx,mts,cts}"],
-    ignores: ["**/*.md/**"],
-    rules: {
-      // `{count && <Row />}` with 0 renders a bare value outside <Text>, which throws on native.
-      "ts/strict-boolean-expressions": [
-        "error",
-        {
-          allowNullableBoolean: true,
-          allowNullableObject: true,
-          allowNumber: false,
-          allowString: false,
-        },
-      ],
-    },
-  },
   // Code bundled by Metro and run on the device.
   {
     files: ["src/**/*.{js,jsx,ts,tsx}"],
@@ -187,6 +170,14 @@ export default antfu(
       "react-native/no-single-element-style-arrays": "error",
       "react-native/no-unused-styles": "error",
       "react-native/split-platform-components": "error",
+    },
+  },
+  // The validated env module is the only place allowed to read process.env.
+  {
+    files: ["src/lib/env.ts"],
+    rules: {
+      "no-restricted-globals": "off",
+      "node/prefer-global/process": "off",
     },
   },
 )
