@@ -33,6 +33,7 @@ export default antfu(
       "no-empty": "error",
       "no-empty-function": "error",
       "no-unused-vars": "off",
+      "react-refresh/only-export-components": "off",
       // Prevent unused imports
       "unused-imports/no-unused-imports": "error",
       // Prevent unnecessary expressions

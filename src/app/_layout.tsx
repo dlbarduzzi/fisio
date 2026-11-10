@@ -30,7 +30,7 @@ function RootNavigator() {
   }
 
   return (
-    <Stack>
+    <Stack screenOptions={{ headerBackButtonDisplayMode: "minimal" }}>
       <Stack.Protected guard={isSignedIn} redirectTo="/sign-in">
         <Stack.Screen
           name="(app)"
