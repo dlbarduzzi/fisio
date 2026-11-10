@@ -15,7 +15,7 @@ const textVariants = cva(
     variants: {
       variant: {
         default: "font-normal",
-        h1: "text-3xl font-extrabold tracking-tight",
+        h1: "text-3xl font-bold tracking-tight",
       },
     },
     defaultVariants: {

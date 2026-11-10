@@ -29,6 +29,7 @@ export default antfu(
       // Variables and functions
       "prefer-const": "error",
       "perfectionist/sort-imports": "off",
+      "style/multiline-ternary": "off",
       "no-var": "error",
       "no-empty": "error",
       "no-empty-function": "error",
