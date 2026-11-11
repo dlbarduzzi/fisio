@@ -16,8 +16,6 @@ import {
   GoogleLogo,
 } from "@/components/icons/brand-logos"
 
-import { DesignSystemLink } from "@/dev/design-system-link"
-
 function errorMessage(error: unknown) {
   if (isClerkAPIResponseError(error)) {
     const first = error.errors[0]
@@ -130,7 +128,6 @@ export default function SignIn() {
             </Link>
             .
           </Text>
-          <DesignSystemLink className="mt-2" />
         </View>
       </View>
     </ScrollView>
