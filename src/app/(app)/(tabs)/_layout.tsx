@@ -1,8 +1,10 @@
 import { NativeTabs } from "expo-router/native-tabs"
 
+import { colors } from "@/styles/tokens"
+
 export default function TabsLayout() {
   return (
-    <NativeTabs tintColor="#38bdf8">
+    <NativeTabs tintColor={colors.primaryText}>
       <NativeTabs.Trigger name="index">
         <NativeTabs.Trigger.Label>
           Today

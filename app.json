@@ -6,7 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "fisio",
-    "userInterfaceStyle": "automatic",
+    "userInterfaceStyle": "light",
     "ios": {
       "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.dlbarduzzi.fisio"
@@ -18,7 +18,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.dlbarduzzi.fisio"
     },
     "web": {
       "output": "server",
@@ -41,7 +42,71 @@
         }
       ],
       "expo-secure-store",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-font",
+        {
+          "ios": {
+            "fonts": [
+              "./assets/fonts/Geist_300Light.ttf",
+              "./assets/fonts/Geist_400Regular.ttf",
+              "./assets/fonts/Geist_500Medium.ttf",
+              "./assets/fonts/Geist_600SemiBold.ttf",
+              "./assets/fonts/Geist_700Bold.ttf",
+              "./assets/fonts/JosefinSans_400Regular.ttf",
+              "./assets/fonts/JosefinSans_400Regular_Italic.ttf",
+              "./assets/fonts/JosefinSans_600SemiBold.ttf"
+            ]
+          },
+          "android": {
+            "fonts": [
+              {
+                "fontFamily": "Geist",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/Geist_300Light.ttf",
+                    "weight": 300
+                  },
+                  {
+                    "path": "./assets/fonts/Geist_400Regular.ttf",
+                    "weight": 400
+                  },
+                  {
+                    "path": "./assets/fonts/Geist_500Medium.ttf",
+                    "weight": 500
+                  },
+                  {
+                    "path": "./assets/fonts/Geist_600SemiBold.ttf",
+                    "weight": 600
+                  },
+                  {
+                    "path": "./assets/fonts/Geist_700Bold.ttf",
+                    "weight": 700
+                  }
+                ]
+              },
+              {
+                "fontFamily": "Josefin Sans",
+                "fontDefinitions": [
+                  {
+                    "path": "./assets/fonts/JosefinSans_400Regular.ttf",
+                    "weight": 400
+                  },
+                  {
+                    "path": "./assets/fonts/JosefinSans_400Regular_Italic.ttf",
+                    "weight": 400,
+                    "style": "italic"
+                  },
+                  {
+                    "path": "./assets/fonts/JosefinSans_600SemiBold.ttf",
+                    "weight": 600
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

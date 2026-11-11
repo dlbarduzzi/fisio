@@ -1,11 +1,15 @@
-import { Text, View } from "react-native"
+import { View } from "react-native"
+
+import { Text } from "@/components/ui/text"
+import { DesignSystemLink } from "@/dev/design-system-link"
 
 export default function Index() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-xl font-bold text-blue-500">
+    <View className="flex-1 items-center justify-center gap-4 bg-background">
+      <Text variant="h2">
         Fisio!
       </Text>
+      <DesignSystemLink />
     </View>
   )
 }

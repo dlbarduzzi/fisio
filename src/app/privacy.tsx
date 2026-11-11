@@ -6,7 +6,7 @@ import { Text } from "@/components/ui/text"
 export default function Privacy() {
   return (
     <ScrollView
-      className="flex-1 bg-white"
+      className="flex-1 bg-background"
       contentContainerClassName="p-6"
       contentInsetAdjustmentBehavior="automatic"
     >

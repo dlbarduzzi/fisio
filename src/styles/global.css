@@ -3,3 +3,122 @@
 @import "tailwindcss/utilities.css";
 
 @import "nativewind/theme";
+
+/*
+ * Fisio design tokens — see docs/design-system.md before changing anything here.
+ * Visual source: Nexter (advanced-css-course). Values marked "derived" do not
+ * exist in the source and were added for semantics or accessibility.
+ * Keep src/styles/tokens.ts in sync with the colors below.
+ */
+
+/*
+ * react-native-css inlines rem as 14px on native unless a root font size is
+ * declared. Pin it to 16px so 1 spacing unit = 4dp and text-base = 16dp,
+ * matching web.
+ */
+:root {
+  font-size: 16px;
+}
+
+@theme {
+  /* ---------- Colors ---------- */
+  --color-background: #ffffff;
+  --color-foreground: #6d5d4b; /* source $color-grey-dark-2 — body text */
+  --color-heading: #54483a; /* source $color-grey-dark-1 — headings on light */
+
+  --color-card: #f9f7f6; /* source $color-grey-light-1 */
+  --color-card-foreground: #6d5d4b;
+
+  --color-muted: #f9f7f6;
+  --color-muted-foreground: #7a6b5b; /* derived — warm, AA on white and muted */
+
+  --color-primary: #c69963; /* source $color-primary — gold */
+  --color-primary-pressed: #b28451; /* source $color-primary-dark */
+  --color-primary-foreground: #ffffff;
+  --color-primary-text: #8a6840; /* derived — gold usable as text on light (AA) */
+
+  --color-secondary: #101d2c; /* source $color-secondary — navy */
+  --color-secondary-pressed: #1b2b3e; /* derived */
+  --color-secondary-foreground: #f9f7f6;
+  --color-secondary-muted: #aaaaaa; /* source $color-grey-light-2 — ONLY on navy */
+
+  --color-accent: #f3ebe0; /* derived — gold tint for selected/pressed surfaces */
+  --color-accent-foreground: #54483a;
+
+  --color-border: #e6dfd7; /* derived */
+  --color-input: #e6dfd7; /* derived */
+  --color-ring: #c69963;
+
+  --color-destructive: #a8402f; /* derived */
+  --color-destructive-foreground: #ffffff;
+  --color-destructive-muted: #fbeeeb;
+
+  --color-success: #4f6b3d; /* derived */
+  --color-success-foreground: #ffffff;
+  --color-success-muted: #eef3ea;
+
+  /* ---------- Typography ---------- */
+  --font-sans: Geist;
+  --font-display: "Josefin Sans";
+
+  /*
+   * Type scale. Uses Tailwind's standard size names so the stock `cn`
+   * (tailwind-merge semantics) recognizes them as font sizes — custom names
+   * like `text-body` would be mistaken for colors and dropped when merged.
+   * Semantic roles live in the <Text variant="..."> component, not here.
+   *
+   * Line heights MUST be unitless ratios (size/lh): react-native-css treats
+   * the value as a multiplier, so `26px` would become 26 × font size.
+   */
+  --text-xs: 12px; /* caption */
+  --text-xs--line-height: calc(16 / 12); /* 16dp */
+  --text-sm: 14px; /* small, muted, eyebrow */
+  --text-sm--line-height: calc(22 / 14); /* 22dp */
+  --text-md: 15px; /* button label — source .btn */
+  --text-md--line-height: calc(20 / 15); /* 20dp */
+  --text-base: 16px; /* body — source line-height 1.6 */
+  --text-base--line-height: calc(26 / 16); /* 26dp */
+  --text-lg: 17px; /* lead */
+  --text-lg--line-height: calc(27 / 17); /* 27dp */
+  --text-xl: 18px; /* h3 */
+  --text-xl--line-height: calc(24 / 18); /* 24dp */
+  --text-2xl: 24px; /* h2 */
+  --text-2xl--line-height: calc(30 / 24); /* 30dp */
+  --text-3xl: 32px; /* h1 */
+  --text-3xl--line-height: calc(36 / 32); /* 36dp */
+  --text-4xl: 36px; /* display */
+  --text-4xl--line-height: calc(40 / 36); /* 40dp */
+
+  /* ---------- Shadows ---------- */
+  /* source story images: 0 2rem 5rem rgba(#000, .1 / .2) */
+  --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.06); /* derived */
+  --shadow-md: 0 20px 50px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 20px 50px rgb(0 0 0 / 0.2);
+}
+
+/*
+ * Optical centering for ALL-CAPS Josefin Sans labels inside a fixed-height box
+ * (buttons). Josefin's ascender (750) barely clears its cap height (702) while
+ * its descender is 250, so iOS and Android — both center the ascender/descender
+ * box when a line-height is set — draw capitals ~0.1em above center.
+ * 0.1em = (capHeight - (ascender - |descender|)) / 2 / unitsPerEm
+ *       = (702 - 500) / 2 / 1000 ≈ 0.1, measured in em so it scales
+ * with the label's font size. Do not use on mixed-case or Geist text.
+ */
+@utility display-caps-center {
+  transform: translateY(0.1em);
+}
+
+/*
+ * nativewind/theme sets --font-sans to the system font per platform.
+ * Re-assert the brand font after that import so ours wins.
+ */
+:root {
+  @media ios {
+    --font-sans: Geist;
+  }
+
+  @media android {
+    --font-sans: Geist;
+  }
+}

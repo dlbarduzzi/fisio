@@ -1,14 +1,13 @@
 import { useState } from "react"
+import { ScrollView, View } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import { ActivityIndicator, ScrollView, View } from "react-native"
 
 import { Image } from "expo-image"
 import { useClerk, useUser } from "@clerk/expo"
 
 import { Text } from "@/components/ui/text"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-
-import { cn } from "cn"
 
 const AVATAR_SIZE = 112
 
@@ -39,12 +38,12 @@ export default function Profile() {
 
   return (
     <ScrollView
-      className="flex-1 bg-white"
+      className="flex-1 bg-background"
       contentContainerStyle={{ paddingTop: insets.top + 32 }}
       contentContainerClassName="items-center px-6 pb-12"
     >
       {/* Avatar */}
-      <View className="rounded-full border-4 border-neutral-200 p-1">
+      <View className="rounded-full border-4 border-border p-1">
         {user?.hasImage ? (
           <Image
             source={{ uri: user.imageUrl }}
@@ -55,10 +54,10 @@ export default function Profile() {
           />
         ) : (
           <View
-            className="items-center justify-center rounded-full bg-sky-500"
+            className="items-center justify-center rounded-full bg-primary"
             style={{ width: AVATAR_SIZE, height: AVATAR_SIZE }}
           >
-            <Text className="text-5xl font-bold text-white">
+            <Text variant="display" className="text-primary-foreground">
               {initial}
             </Text>
           </View>
@@ -69,31 +68,23 @@ export default function Profile() {
         {firstName ? `Welcome, ${firstName}` : "Welcome"}
       </Text>
       {email ? (
-        <Text className="mt-1 text-center text-sm text-neutral-500">
+        <Text variant="muted" className="mt-1 text-center">
           {email}
         </Text>
       ) : null}
       {/* Signed-in badge */}
-      <View className={cn(
-        "mt-4 flex-row items-center gap-2 rounded-full",
-        "border border-emerald-200 bg-emerald-50 px-3 py-1",
-      )}
-      >
-        <View className="size-2 rounded-full bg-emerald-500" />
-        <Text className="text-xs font-medium text-emerald-700">
-          You are signed in
-        </Text>
-      </View>
+      <Badge variant="success" className="mt-4 self-center">
+        <View className="size-2 rounded-full bg-success" />
+        <Text>You are signed in</Text>
+      </Badge>
       {/* Sign out */}
       <Button
         variant="outline"
         className="mt-10 w-full"
         onPress={handleSignOut}
-        disabled={isSigningOut}
+        loading={isSigningOut}
       >
-        {isSigningOut
-          ? <ActivityIndicator color="#525252" />
-          : <Text>Sign out</Text>}
+        <Text>Sign out</Text>
       </Button>
     </ScrollView>
   )

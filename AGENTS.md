@@ -29,6 +29,15 @@ Run lint and typecheck before declaring any task done.
 - Import `Link`, `router`, and `useLocalSearchParams` from `expo-router`.
 - Docs: https://docs.expo.dev/router/introduction.md
 
+## Design System & UI
+
+- Read [docs/design-system.md](./docs/design-system.md) before creating or modifying any UI.
+- Reuse the components in `src/components/ui/` and the tokens in `src/styles/global.css`. Add a variant before adding a new component.
+- Style with NativeWind `className` and semantic tokens (`bg-primary`, `text-foreground`, `border-border`). No hex values, Tailwind palette colors, or arbitrary values when a token exists.
+- Use `Text` from `@/components/ui/text`, never the raw React Native `Text`.
+- Keep every screen visually consistent with the design system.
+- Do not add UI component libraries without explicit approval.
+
 ## Building with EAS
 
 Use EAS to build, sign, and submit the app in the cloud (`eas build`, `eas submit`) and to ship over-the-air updates (`eas update`) — no local Xcode or Android Studio required. Run EAS CLI as `bunx eas-cli <command>` in Bun projects, or `npx eas-cli@latest <command>` otherwise; substitute that for bare `eas` in docs examples.

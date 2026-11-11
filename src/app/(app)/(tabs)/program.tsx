@@ -7,12 +7,12 @@ export default function Program() {
   const insets = useSafeAreaInsets()
   return (
     <ScrollView
-      className="flex-1 bg-white"
+      className="flex-1 bg-background"
       contentContainerStyle={{ paddingTop: insets.top + 16 }}
       contentContainerClassName="gap-2 px-6 pb-12"
     >
       <Text variant="h1">Program</Text>
-      <Text className="text-neutral-600 text-lg">
+      <Text variant="lead">
         Your recovery program and exercise library will live here.
       </Text>
     </ScrollView>

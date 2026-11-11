@@ -161,12 +161,12 @@ export default antfu(
         },
       ],
       "react-native/no-inline-styles": "error",
-      // Raw text outside <Text> throws on native. Link and Button wrap string children in <Text>,
+      // Raw text outside <Text> throws on native. Link, Button, CardTitle and CardDescription render <Text>,
       // and native tab labels take their string child as the label.
       "react-native/no-raw-text": [
         "error",
         {
-          skip: ["Link", "Button", "NativeTabs.Trigger.Label"],
+          skip: ["Link", "Button", "NativeTabs.Trigger.Label", "CardTitle", "CardDescription"],
         },
       ],
       "react-native/no-single-element-style-arrays": "error",

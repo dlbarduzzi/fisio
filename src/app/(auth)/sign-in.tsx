@@ -16,6 +16,8 @@ import {
   GoogleLogo,
 } from "@/components/icons/brand-logos"
 
+import { DesignSystemLink } from "@/dev/design-system-link"
+
 function errorMessage(error: unknown) {
   if (isClerkAPIResponseError(error)) {
     const first = error.errors[0]
@@ -67,7 +69,6 @@ function ProviderButton({ label, logo, onPress, pending }: ProviderButtonProps) 
   return (
     <Button
       variant="outline"
-      className="gap-x-2"
       onPress={onPress}
       aria-busy={pending}
       aria-label={label}
@@ -85,7 +86,7 @@ export default function SignIn() {
   const insets = useSafeAreaInsets()
   return (
     <ScrollView
-      className="flex-1 bg-white"
+      className="flex-1 bg-background"
       contentContainerStyle={{
         paddingTop: insets.top,
         paddingBottom: insets.bottom,
@@ -115,20 +116,21 @@ export default function SignIn() {
             logo={<AppleLogo />}
             onPress={notImplemented}
           />
-          <Text className="mt-3 text-center text-sm leading-[20px] text-neutral-500">
+          <Text variant="muted" className="mt-3 text-center">
             By continuing, you agree to our
             {"\n"}
-            <Link href="/terms" className="font-medium">
+            <Link href="/terms" className="font-medium text-heading">
               Terms of Service
             </Link>
             {" "}
             and
             {" "}
-            <Link href="/privacy" className="font-medium">
+            <Link href="/privacy" className="font-medium text-heading">
               Privacy Policy
             </Link>
             .
           </Text>
+          <DesignSystemLink className="mt-2" />
         </View>
       </View>
     </ScrollView>
